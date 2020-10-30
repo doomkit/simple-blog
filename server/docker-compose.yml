@@ -1,0 +1,28 @@
+version: '3.7'
+services:
+  postgres:
+    container_name: postgres
+    restart: always
+    image: postgres:latest
+    env_file:
+      - ./db/.env.postgres
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
+
+  pgweb:
+    container_name: pgweb
+    restart: always
+    image: sosedoff/pgweb
+    ports:
+      - '8081:8081'
+    links:
+      - postgres:postgres
+    env_file:
+      - ./db/.env.pgweb
+    depends_on:
+      - postgres
+
+volumes:
+  pgdata:
