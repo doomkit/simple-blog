@@ -1,13 +1,23 @@
 {
-	"name": "my-app",
+	"name": "simple-blog",
 	"version": "1.0.0",
-	"description": "",
-	"main": "index.js",
+	"description": "A simple blog inspired by surrenderat20.net",
+	"main": "src/index.ts",
 	"scripts": {
 		"dev": "nodemon --exec ts-node src/index.ts"
 	},
-	"keywords": [],
-	"author": "",
+	"author": {
+		"name": "Nick",
+    "email": "n.shkarupa@yahoo.com",
+    "url": "https://nikson.dev"
+	},
+	"bugs": "https://github.com/doomkit/simple-blog/labels/bug",
+	"homepage": "",
+	"keywords": ["blog", "nodejs", "react"],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/doomkit/simple-blog"
+	},
 	"license": "ISC",
 	"devDependencies": {
 		"@types/node": "^14.14.2",
