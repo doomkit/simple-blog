@@ -10,9 +10,9 @@ Minimalistic blog inspired by [surrenderat20.net](https://www.surrenderat20.net/
 
 ### DB configuration
 
-To start database using docker you need to create two config files inside `db` folder.
+To start database using docker you need to create two config files.
 
-**db/.env.postgres**  
+**.env.postgres**  
 
 ```
 POSTGRES_PASSWORD=${PASSWORD}
@@ -22,7 +22,7 @@ POSTGRES_DB=${DBNAME}
 
 Replace `${PASSWORD}` and `${USER}` with your credentials and provide `${DBNAME}` database name.
 
-**db/.env.pgweb**
+**.env.pgweb**
 
 ```
 DATABASE_URL=postgresql://[user[:password]@][netloc][:port][,...][/dbname][?param1=value1&...]

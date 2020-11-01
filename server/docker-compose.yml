@@ -5,7 +5,7 @@ services:
     restart: always
     image: postgres:latest
     env_file:
-      - ./db/.env.postgres
+      - .env
     volumes:
       - pgdata:/var/lib/postgresql/data
     ports:
@@ -20,7 +20,7 @@ services:
     links:
       - postgres:postgres
     env_file:
-      - ./db/.env.pgweb
+      - .env.pgweb
     depends_on:
       - postgres
 

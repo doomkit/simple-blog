@@ -4,16 +4,22 @@
 	"description": "A simple blog inspired by surrenderat20.net",
 	"main": "src/index.ts",
 	"scripts": {
-		"dev": "nodemon --exec ts-node src/index.ts"
+		"watch": "tsc -w",
+		"dev": "nodemon --exec ts-node src/index.ts",
+		"create:migration": "npx mikro-orm migration:create"
 	},
 	"author": {
 		"name": "Nick",
-    "email": "n.shkarupa@yahoo.com",
-    "url": "https://nikson.dev"
+		"email": "n.shkarupa@yahoo.com",
+		"url": "https://nikson.dev"
 	},
 	"bugs": "https://github.com/doomkit/simple-blog/labels/bug",
 	"homepage": "",
-	"keywords": ["blog", "nodejs", "react"],
+	"keywords": [
+		"blog",
+		"nodejs",
+		"react"
+	],
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/doomkit/simple-blog"
@@ -30,6 +36,17 @@
 		"@mikro-orm/core": "^4.2.3",
 		"@mikro-orm/migrations": "^4.2.3",
 		"@mikro-orm/postgresql": "^4.2.3",
+		"dotenv": "^8.2.0",
 		"pg": "^8.4.1"
+	},
+	"resolutions": {
+		"knex": "0.21.6"
+	},
+	"mikro-orm": {
+		"useTsNode": true,
+		"configPaths": [
+			"./src/mikro-orm.config.ts",
+			"./dist/mikro-orm.config.js"
+		]
 	}
 }
