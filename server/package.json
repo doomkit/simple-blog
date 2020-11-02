@@ -2,10 +2,10 @@
 	"name": "simple-blog",
 	"version": "1.0.0",
 	"description": "A simple blog inspired by surrenderat20.net",
-	"main": "src/index.ts",
+	"main": "src/main.ts",
 	"scripts": {
 		"watch": "tsc -w",
-		"dev": "nodemon --exec ts-node src/index.ts",
+		"dev": "nodemon --exec ts-node src/main.ts",
 		"create:migration": "npx mikro-orm migration:create"
 	},
 	"author": {

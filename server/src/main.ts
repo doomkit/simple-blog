@@ -1,8 +1,3 @@
-import path from 'path';
-require('dotenv').config({
-	path: path.resolve(process.cwd(), '.env.postgres'),
-});
-
 import { MikroORM } from '@mikro-orm/core';
 import { Post } from './entities';
 import mikroOrmConfig from './mikro-orm.config';
