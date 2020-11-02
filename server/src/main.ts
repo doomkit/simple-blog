@@ -1,12 +1,34 @@
+import 'reflect-metadata';
 import { MikroORM } from '@mikro-orm/core';
-import { Post } from './entities';
 import mikroOrmConfig from './mikro-orm.config';
+import express from 'express';
+import { __port__ } from './constants';
+import { ApolloServer } from 'apollo-server-express';
+import { buildSchema } from 'type-graphql';
+import { PostResolver } from './resolvers/post';
 
 const server = async () => {
 	const orm = await MikroORM.init(mikroOrmConfig);
 	await orm.getMigrator().up();
-	const post = orm.em.create(Post, { title: 'First post!' });
-	await orm.em.persistAndFlush(post);
+
+	const app = express();
+	app.get('/', (_, res) => {
+		res.send('Hello World!');
+	});
+
+	const apolloServer = new ApolloServer({
+		schema: await buildSchema({
+			resolvers: [PostResolver],
+			validate: false,
+		}),
+		context: () => ({ em: orm.em }),
+	});
+
+	apolloServer.applyMiddleware({ app });
+
+	app.listen(__port__, () => {
+		console.log(`🚀 Server is running on port ${__port__}!`);
+	});
 };
 
 server().catch((err) => console.error(err));
