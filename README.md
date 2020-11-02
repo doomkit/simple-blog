@@ -4,23 +4,27 @@ Minimalistic blog inspired by [surrenderat20.net](https://www.surrenderat20.net/
 
 ## Development
 
-**Usefull links for development:**
+**Documentations for used libraries:**
 
 - [MIKRO-ORM docs](https://mikro-orm.io/docs/installation/) – TypeScript ORM for Node.js
 
+**Links for development:**
+
+- [PGWeb Postgress client](http://localhost:8081/)
+- [GraphQL playground](http://localhost:3000/graphql)
+
 ### DB configuration
 
-To start database using docker you need to create two config files.
+To start database using docker you need to create two config files:
 
 **.env.postgres**  
 
 ```
 POSTGRES_PASSWORD=${PASSWORD}
 POSTGRES_USER=${USER}
-POSTGRES_DB=${DBNAME}
+POSTGRES_DB=${DB_NAME}
+POSTGRES_PORT=${PORT_NUMBER}
 ```
-
-Replace `${PASSWORD}` and `${USER}` with your credentials and provide `${DBNAME}` database name.
 
 **.env.pgweb**
 
@@ -35,5 +39,3 @@ After creating those files, start DB:
 
 - start DB: `docker-compose up -d` (remove `-d` flag if you want to see logs)
 - stop DB: `docker-compose down`
-
-To view database using pgweb open [http://0.0.0.0:8081/](http://0.0.0.0:8081/) in browser.
