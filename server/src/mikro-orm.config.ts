@@ -1,5 +1,5 @@
 import { MikroORM } from '@mikro-orm/core';
-import { Post } from './entities';
+import { Post, User } from './entities';
 import { __db__, __prod__ } from './constants';
 
 export default {
@@ -11,6 +11,6 @@ export default {
 	migrations: {
 		path: './src/migrations',
 	},
-	entities: [Post],
+	entities: [Post, User],
 	debug: __prod__,
 } as Parameters<typeof MikroORM.init>[0];
