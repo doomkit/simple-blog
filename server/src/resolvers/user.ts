@@ -5,6 +5,7 @@ import {
 	InputType,
 	Mutation,
 	ObjectType,
+	Query,
 	Resolver,
 } from 'type-graphql';
 import { User } from '../entities';
@@ -48,10 +49,19 @@ class UserResponse {
 
 @Resolver()
 export class UserResolver {
+	@Query(() => User, { nullable: true })
+	async checkSession(@Ctx() { em, req }: MyContext) {
+		if (!req.session?.userId) {
+			return null;
+		}
+		const user = await em.findOne(User, { id: req.session.userId });
+		return user;
+	}
+
 	@Mutation(() => UserResponse)
 	async register(
 		@Arg('data') data: RegisterInput,
-		@Ctx() { em }: MyContext
+		@Ctx() { em, req }: MyContext
 	): Promise<UserResponse> {
 		// CONSIDER: lowercase letters === uppercase letters for username (advanced uniqueness check)
 
@@ -98,13 +108,14 @@ export class UserResolver {
 				};
 			}
 		}
+		req.session!.userId = user.id;
 		return { user };
 	}
 
 	@Mutation(() => UserResponse)
 	async login(
 		@Arg('data') data: LoginInput,
-		@Ctx() { em }: MyContext
+		@Ctx() { em, req }: MyContext
 	): Promise<UserResponse> {
 		const user = await em.findOne(User, { username: data.username });
 		if (!user) {
@@ -128,6 +139,7 @@ export class UserResolver {
 				],
 			};
 		}
+		req.session!.userId = user.id;
 		return { user };
 	}
 }
