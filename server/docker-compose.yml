@@ -4,8 +4,7 @@ services:
     container_name: postgres
     restart: always
     image: postgres:latest
-    env_file:
-      - .env
+    env_file: ['.env']
     volumes:
       - pgdata:/var/lib/postgresql/data
     ports:
@@ -19,10 +18,25 @@ services:
       - '8081:8081'
     links:
       - postgres:postgres
-    env_file:
-      - .env.pgweb
+    env_file: ['.env']
     depends_on:
       - postgres
 
+  redis:
+    container_name: redis
+    restart: always
+    image: redis:alpine
+    command: ['redis-server', '--appendonly', 'yes']
+    networks:
+      - redis-net
+    volumes:
+      - redis-data:/data
+    ports:
+      - '6379:6379'
+
+networks:
+  redis-net:
+
 volumes:
   pgdata:
+  redis-data:
